@@ -8,6 +8,8 @@ import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
     public static void main(String[] args) {
+    //    Article article = new Article("Треска заморская", "Треска заморская, кабачковая)");
+
         ProductBasket productBasket = new ProductBasket(5);
 
         Product butter = new FixPriceProduct("Масло");
