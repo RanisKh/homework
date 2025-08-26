@@ -17,6 +17,9 @@ public class App {
         };
         SearchEngine collection = new SearchEngine(articles);
         Article[] foundArticles = collection.searchByKeyword("выращенная");
+        SearchEngine searchEngine = new SearchEngine();
+
+
 
         // Выводим найденные статьи
         for (Article article : foundArticles) {
