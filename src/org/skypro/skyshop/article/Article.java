@@ -39,7 +39,7 @@ public final class Article implements Searchable{
 
     @Override
     public String searchTerm() {
-        return toString();
+        return title + " " + text;
     }
 
     @Override
@@ -50,5 +50,10 @@ public final class Article implements Searchable{
     @Override
     public String getTypeContent() {
         return "ARTICLE";
+    }
+
+    @Override
+    public String getSearchTerm() {
+        return "";
     }
 }

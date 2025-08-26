@@ -28,4 +28,24 @@ public class DiscountedProduct extends  Product{
         return "Скидочный продут: "  + name +  ", стоимость=" + basePrice +
                 "скидка" + discountInPercentages;
     }
+
+    @Override
+    public String searchTerm() {
+        return "";
+    }
+
+    @Override
+    public String getTypeContent() {
+        return "";
+    }
+
+    @Override
+    public String getStringRepresentation() {
+        return super.getStringRepresentation();
+    }
+
+    @Override
+    public String getSearchTerm() {
+        return "";
+    }
 }

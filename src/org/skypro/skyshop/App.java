@@ -1,5 +1,7 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.article.Article;
+import org.skypro.skyshop.article.SearchEngine;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
@@ -8,11 +10,25 @@ import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
     public static void main(String[] args) {
-    //    Article article = new Article("Треска заморская", "Треска заморская, кабачковая)");
+        Article[] articles = {
+                new Article("Треска", "Треска, дальневосточная выращенная с ошибками "),
+                new Article("Баранина", "Выращенная на бескрайних полях Сахары"),
+                new Article("Banana", "Bananas from Arctic")
+        };
+        SearchEngine collection = new SearchEngine(articles);
+        Article[] foundArticles = collection.searchByKeyword("выращенная");
+
+        // Выводим найденные статьи
+        for (Article article : foundArticles) {
+            System.out.println("Название: " + article.getTitle());
+            System.out.println("Текст: " + article.getText());
+            System.out.println("---");
+        }
 
         ProductBasket productBasket = new ProductBasket(5);
 
-        Product butter = new FixPriceProduct("Масло");
+
+        Product butter = new FixPriceProduct("Banana");
         Product fish = new FixPriceProduct("Треска");
         Product meat = new DiscountedProduct("Баранина", 700, 30 );
         Product rise = new SimpleProduct("Рис", 100);
@@ -29,10 +45,14 @@ public class App {
         System.out.println("Корзина: ");
         productBasket.printProductBasket();
 
-        System.out.println("Есть ли рыба в корзине " + productBasket.hasProduct("", "Рыба"));
-        System.out.println("Есть ли баранина в корзине " + productBasket.hasProduct("", "Баранина"));
+        Product[] Product = new Product[0];
+        System.out.println("Есть ли рыба в корзине " + productBasket.hasProduct(Product, "Рыба"));
+        System.out.println("Есть ли баранина в корзине " + productBasket.hasProduct(Product, "Баранина"));
 
         productBasket.clearBasket();
         productBasket.printProductBasket();
+
+
+
     }
 }
