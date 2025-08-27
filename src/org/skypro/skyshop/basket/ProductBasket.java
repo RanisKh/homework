@@ -48,9 +48,12 @@ public class ProductBasket {
         }
     }
 
-    public boolean hasProduct(String products, String name) {
+    public boolean hasProduct(Product[] products, String name) {
+        if (products == null || name == null) {
+            return false;
+        }
         for (Product product : products) {
-            if (product.getName().equalsIgnoreCase(name)) {
+            if (product != null && product.getName().equalsIgnoreCase(name)) {
                 return true;
             }
         }
