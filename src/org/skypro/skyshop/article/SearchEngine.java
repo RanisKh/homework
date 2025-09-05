@@ -1,6 +1,12 @@
 package org.skypro.skyshop.article;
 
 public class SearchEngine {
+
+
+
+
+
+
     private Article[] articles;
 
     public SearchEngine(Article[] articles) {
