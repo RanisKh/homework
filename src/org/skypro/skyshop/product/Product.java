@@ -6,6 +6,9 @@ public abstract class Product implements Searchable {
     String name;
 
     public Product(String name) {
+        if(name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("Название продукта не может быть пустой строкой или null.");
+        }
         this.name = name;
     }
 
@@ -13,7 +16,7 @@ public abstract class Product implements Searchable {
         return name;
     }
 
-    public abstract int getPrice();
+    public abstract double getPrice();
 
     public boolean isSpecial() {
         return true;
