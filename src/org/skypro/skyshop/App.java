@@ -8,67 +8,144 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.SimpleProduct;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
+        ProductBasket basket = new ProductBasket();
 
-        ProductBasket productBasket = new ProductBasket(5);
+        // Создаем продукты
+        Product apple1 = new Product("Яблоко", 50.0) {
+            @Override
+            public String searchTerm() {
+                return "";
+            }
 
-        Product apple = new SimpleProduct("", 99);
-        Product orange = new SimpleProduct("  ", -100);
-        Product noodle = new SimpleProduct("Лапша", - 5);
-        Product butter = new FixPriceProduct("Banana");
-        Product fish = new FixPriceProduct("Треска");
-        Product meat = new DiscountedProduct("Баранина", 700, 30 );
-        Product rise = new SimpleProduct("Рис", 100);
-        Product bread = new SimpleProduct("Хлеб", 55);
-        Product meat2 = new DiscountedProduct("Говядина", 500, 10);
+            @Override
+            public String getTypeContent() {
+                return "";
+            }
 
-        Article[] articles = {
-                new Article("Треска", "Треска, дальневосточная выращенная с ошибками "),
-                new Article("Баранина", "Выращенная на бескрайних полях Сахары"),
-                new Article("Banana", "Bananas from Arctic")
+            @Override
+            public String getSearchTerm() {
+                return "";
+            }
+
+            @Override
+            public double getPrice() {
+                return 0;
+            }
         };
-        SearchEngine collection = new SearchEngine(articles);
-        Article[] foundArticles = collection.searchByKeyword("выращенная");
-        SearchEngine searchEngine = new SearchEngine();
+        Product banana = new Product("Банан", 70.0) {
+            @Override
+            public String searchTerm() {
+                return "";
+            }
 
-        for (Article article : foundArticles) {
-            System.out.println("Название: " + article.getTitle());
-            System.out.println("Текст: " + article.getText());
-            System.out.println("---");
+            @Override
+            public String getTypeContent() {
+                return "";
+            }
+
+            @Override
+            public String getSearchTerm() {
+                return "";
+            }
+
+            @Override
+            public double getPrice() {
+                return 0;
+            }
+        };
+        Product apple2 = new Product("Яблоко", 55.0) {
+            @Override
+            public String searchTerm() {
+                return "";
+            }
+
+            @Override
+            public String getTypeContent() {
+                return "";
+            }
+
+            @Override
+            public String getSearchTerm() {
+                return "";
+            }
+
+            @Override
+            public double getPrice() {
+                return 0;
+            }
+        };
+        Product orange = new Product("Апельсин", 60.0) {
+            @Override
+            public String searchTerm() {
+                return "";
+            }
+
+            @Override
+            public String getTypeContent() {
+                return "";
+            }
+
+            @Override
+            public String getSearchTerm() {
+                return "";
+            }
+
+            @Override
+            public double getPrice() {
+                return 0;
+            }
+        };
+        Product apple3 = new Product("Яблоко", 52.0) {
+            @Override
+            public String searchTerm() {
+                return "";
+            }
+
+            @Override
+            public String getTypeContent() {
+                return "";
+            }
+
+            @Override
+            public String getSearchTerm() {
+                return "";
+            }
+
+            @Override
+            public double getPrice() {
+                return 0;
+            }
+        };
+
+        // Добавляем продукты в корзину
+        basket.addProduct(apple1);
+        basket.addProduct(banana);
+        basket.addProduct(apple2);
+        basket.addProduct(orange);
+        basket.addProduct(apple3);
+
+        System.out.println("Изначальное количество продуктов: " + basket.getProductCount());
+
+        // Демонстрация нового метода - удаление всех яблок
+        boolean removedApples = basket.removeProductByName("Яблоко");
+        System.out.println("Удалено яблок: " + removedApples);
+        System.out.println("Осталось продуктов: " + basket.getProductCount());
+
+        // Попытка удалить несуществующий продукт
+        boolean removedGrapes = basket.removeProductByName("Виноград");
+        System.out.println("Удалено винограда: " + removedGrapes);
+        System.out.println("Корзина пуста: " + basket.isEmpty());
+
+        // Показываем удаленные яблоки
+        System.out.println("Удаленные яблоки:");
+        for (Product apple : removedApples) {
+            System.out.println(" - " + apple.getName() + " по цене " + apple.getPrice());
         }
-
-
-     //   productBasket.addProduct(butter);
-     //   productBasket.addProduct(fish);
-     //   productBasket.addProduct(meat2);
-     //   productBasket.addProduct(rise);
-     //   productBasket.addProduct(bread);
-     //   productBasket.addProduct(meat);
-
-        productBasket.addProduct(apple);
-        productBasket.addProduct(noodle);
-        productBasket.addProduct(orange);
-
-
-        try {
-            System.out.println("Корзина: ");
-            productBasket.printProductBasket();
-        } catch (IllegalArgumentException e){
-            System.out.println("Error");
-        }
-
-        Product[] Product = new Product[0];
-        System.out.println("Есть ли рыба в корзине " + productBasket.hasProduct(Product, "Рыба"));
-        System.out.println("Есть ли баранина в корзине " + productBasket.hasProduct(Product, "Баранина"));
-
-
-
-
-        productBasket.printProductBasket();
-        productBasket.clearBasket();
-
-
 
     }
 }
