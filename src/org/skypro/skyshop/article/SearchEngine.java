@@ -5,8 +5,8 @@ public class SearchEngine {
     private List<Searchable> searchables;
     private Article[] articles;
 
-    public SearchEngine(List<Searchable> searchables) {
-        this.searchables = searchables;
+    public SearchEngine(Article[] searchables) {
+        this.searchables = List.of(searchables);
     
     }
     public Searchable findMostRelevant(String search) throws BestResultNotFound {

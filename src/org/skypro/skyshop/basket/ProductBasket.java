@@ -2,75 +2,76 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Iterator;
 
 public class ProductBasket {
-    private final Product[] products;
-    private int size;
+    private List<Product> products;
 
-    public ProductBasket(int basket) {
-        products = new Product[basket];
-        size = 0;
+    public ProductBasket() {
+        this.products = new LinkedList<>();
     }
+
 
     public void addProduct(Product product) {
-        if (size < products.length) {
-            products[size] = product;
-            size++;
-        } else {
-            System.out.println("Корзина заполнена, невозможно добавить продукт");
-        }
-
-
-    }
-
-    public int getTotalPrice() {
-        return 0;
+        products.add(product);
     }
 
 
-    public void printProductBasket() {
-        int specialCount = 0;
-        if (size == 0) {
-            System.out.println("Корзина пустая");
-            return;
-        }
+    public boolean removeProduct(Product product) {
+        return products.remove(product);
+    }
+
+
+    public List<Product> getProducts() {
+        return new LinkedList<>(products); // возвращаем копию для защиты от изменений
+    }
+
+
+    public void clear() {
+        products.clear();
+    }
+
+
+    public boolean isEmpty() {
+        return products.isEmpty();
+    }
+
+
+    public int getProductCount() {
+        return products.size();
+    }
+
+
+    public boolean containsProduct(String productName) {
         for (Product product : products) {
-            if (product != null) {
-                System.out.println(product.getName() + " : " + product.getPrice());
-            }
-            System.out.println("Итого " + getTotalPrice());
-        }
-        for (Product product : products){
-            if (product.isSpecial()){
-                specialCount ++;
-            }
-        }
-    }
-
-    public boolean hasProduct(Product[] products, String name) {
-        if (products == null || name == null) {
-            return false;
-        }
-        for (Product product : products) {
-            if (product != null && product.getName().equalsIgnoreCase(name)) {
+            // Предполагаем, что у класса Product есть метод getName()
+            if (product.getName().equals(productName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void clearBasket() {
-        Arrays.fill(products, null);
+
+    public boolean removeProductByName(String productName) {
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getName().equals(productName)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "ProductBasket{" +
-                "products=" + Arrays.toString(products) +
-                ", size=" + size +
-                '}';
+    public double getTotalPrice() {
+        double total = 0.0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
     }
 }
