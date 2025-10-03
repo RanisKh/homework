@@ -31,6 +31,8 @@ public class App {
         basket.addProduct(orange);
         basket.addProduct(apple3);
 
+        multiCatch();
+
         System.out.println("Изначальное количество продуктов: " + basket.getProductCount());
 
 
