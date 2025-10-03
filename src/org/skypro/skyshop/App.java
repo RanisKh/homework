@@ -15,137 +15,54 @@ public class App {
     public static void main(String[] args) {
         ProductBasket basket = new ProductBasket();
 
-        // Создаем продукты
-        Product apple1 = new Product("Яблоко", 50.0) {
-            @Override
-            public String searchTerm() {
-                return "";
-            }
 
-            @Override
-            public String getTypeContent() {
-                return "";
-            }
+        SimpleProduct apple1 = new SimpleProduct("Яблоко", -50.0);
+        SimpleProduct banana = new SimpleProduct("Банан", 70.0);
+        FixPriceProduct apple2 = new FixPriceProduct("Яблоко");
+        DiscountedProduct orange = new DiscountedProduct("Апельсин", 60.0, 120);
+        SimpleProduct apple3 = new SimpleProduct("Яблоко", 52.0);
 
-            @Override
-            public String getSearchTerm() {
-                return "";
-            }
+        Article Article1 = new Article("Бананы из юга", "Какой то текст");
+        Article test = new Article("Русские яблочки", "Текст другого содержания");
 
-            @Override
-            public double getPrice() {
-                return 0;
-            }
-        };
-        Product banana = new Product("Банан", 70.0) {
-            @Override
-            public String searchTerm() {
-                return "";
-            }
-
-            @Override
-            public String getTypeContent() {
-                return "";
-            }
-
-            @Override
-            public String getSearchTerm() {
-                return "";
-            }
-
-            @Override
-            public double getPrice() {
-                return 0;
-            }
-        };
-        Product apple2 = new Product("Яблоко", 55.0) {
-            @Override
-            public String searchTerm() {
-                return "";
-            }
-
-            @Override
-            public String getTypeContent() {
-                return "";
-            }
-
-            @Override
-            public String getSearchTerm() {
-                return "";
-            }
-
-            @Override
-            public double getPrice() {
-                return 0;
-            }
-        };
-        Product orange = new Product("Апельсин", 60.0) {
-            @Override
-            public String searchTerm() {
-                return "";
-            }
-
-            @Override
-            public String getTypeContent() {
-                return "";
-            }
-
-            @Override
-            public String getSearchTerm() {
-                return "";
-            }
-
-            @Override
-            public double getPrice() {
-                return 0;
-            }
-        };
-        Product apple3 = new Product("Яблоко", 52.0) {
-            @Override
-            public String searchTerm() {
-                return "";
-            }
-
-            @Override
-            public String getTypeContent() {
-                return "";
-            }
-
-            @Override
-            public String getSearchTerm() {
-                return "";
-            }
-
-            @Override
-            public double getPrice() {
-                return 0;
-            }
-        };
-
-        // Добавляем продукты в корзину
         basket.addProduct(apple1);
         basket.addProduct(banana);
         basket.addProduct(apple2);
         basket.addProduct(orange);
         basket.addProduct(apple3);
 
+        multiCatch();
+
         System.out.println("Изначальное количество продуктов: " + basket.getProductCount());
 
-        // Демонстрация нового метода - удаление всех яблок
+
         boolean removedApples = basket.removeProductByName("Яблоко");
         System.out.println("Удалено яблок: " + removedApples);
         System.out.println("Осталось продуктов: " + basket.getProductCount());
 
-        // Попытка удалить несуществующий продукт
+
         boolean removedGrapes = basket.removeProductByName("Виноград");
         System.out.println("Удалено винограда: " + removedGrapes);
         System.out.println("Корзина пуста: " + basket.isEmpty());
 
-        // Показываем удаленные яблоки
+
         System.out.println("Удаленные яблоки:");
         for (Product apple : removedApples) {
             System.out.println(" - " + apple.getName() + " по цене " + apple.getPrice());
         }
 
+    }
+
+    public static void multiCatch() {
+        try {
+            SimpleProduct apple1 = new SimpleProduct("Яблоко", -50.0);
+        } catch (RuntimeException e) {
+            System.out.println("Цена указана неверно");
+        }
+        try {
+            DiscountedProduct orange = new DiscountedProduct("Апельсин", 60.0, 120);
+        } catch (RuntimeException e) {
+            System.out.println("Скидка указана неверно");
+        }
     }
 }

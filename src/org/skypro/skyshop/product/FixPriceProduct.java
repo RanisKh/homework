@@ -4,7 +4,7 @@ public class FixPriceProduct extends Product {
     private static final double FIX_PRICE = 99;
 
     public FixPriceProduct(String product) {
-        super(product, 50.0);
+        super(product, FIX_PRICE);
     }
 
     @Override

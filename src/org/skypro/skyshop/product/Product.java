@@ -21,4 +21,12 @@ public abstract class Product implements Searchable {
     public boolean isSpecial() {
         return true;
     }
+
+    public abstract String searchTerm();
+
+    protected String getStringRepresentation() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

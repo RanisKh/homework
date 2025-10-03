@@ -47,7 +47,7 @@ public class ProductBasket {
     public boolean containsProduct(String productName) {
         for (Product product : products) {
             // Предполагаем, что у класса Product есть метод getName()
-            if (product.getName().equals(productName)) {
+            if (product.getName().contains(productName)) {
                 return true;
             }
         }
