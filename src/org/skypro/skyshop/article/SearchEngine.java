@@ -37,10 +37,6 @@ public class SearchEngine {
         return mostRelevant;
     }
 
- 
-    public SearchEngine() {
-
-    }
     private int countOccurrences(String str, String sub) {
         if (sub.isEmpty()) {
             return 0;
