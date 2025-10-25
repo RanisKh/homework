@@ -33,23 +33,10 @@ public class App {
 
         multiCatch();
 
+        s
+
         System.out.println("Изначальное количество продуктов: " + basket.getProductCount());
 
-
-        boolean removedApples = basket.removeProductByName("Яблоко");
-        System.out.println("Удалено яблок: " + removedApples);
-        System.out.println("Осталось продуктов: " + basket.getProductCount());
-
-
-        boolean removedGrapes = basket.removeProductByName("Виноград");
-        System.out.println("Удалено винограда: " + removedGrapes);
-        System.out.println("Корзина пуста: " + basket.isEmpty());
-
-
-        System.out.println("Удаленные яблоки:");
-        for (Product apple : removedApples) {
-            System.out.println(" - " + apple.getName() + " по цене " + apple.getPrice());
-        }
 
     }
 

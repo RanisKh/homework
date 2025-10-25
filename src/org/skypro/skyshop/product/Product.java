@@ -2,8 +2,11 @@ package org.skypro.skyshop.product;
 
 import org.skypro.skyshop.article.Searchable;
 
+import java.util.LinkedList;
+
 public abstract class Product implements Searchable {
     String name;
+    private double price;
 
     public Product(String name, double v) {
         if(name == null || name.trim().isEmpty()){
@@ -12,11 +15,16 @@ public abstract class Product implements Searchable {
         this.name = name;
     }
 
+    public static void add(String name, LinkedList<Product> products) {
+    }
+
     public String getName() {
         return name;
     }
 
-    public abstract double getPrice();
+    public double getPrice(){
+        return price;
+    }
 
     public boolean isSpecial() {
         return true;
@@ -29,4 +37,9 @@ public abstract class Product implements Searchable {
                 "name='" + name + '\'' +
                 '}';
     }
+
+    public String getNameProduct() {
+        return name;
+    }
+
 }
