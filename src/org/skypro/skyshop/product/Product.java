@@ -1,45 +1,40 @@
 package org.skypro.skyshop.product;
 
-import org.skypro.skyshop.article.Searchable;
 
-import java.util.LinkedList;
+import org.skypro.skyshop.product.search.Searchable;
 
 public abstract class Product implements Searchable {
-    String name;
-    private double price;
+    public String name;
 
-    public Product(String name, double v) {
-        if(name == null || name.trim().isEmpty()){
-            throw new IllegalArgumentException("Название продукта не может быть пустой строкой или null.");
-        }
-        this.name = name;
+
+    public Product(String product) {
+        validateName(name);
+        this.name = product;
     }
 
-    public static void add(String name, LinkedList<Product> products) {
+    private void validateName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Название продукта не может быть null, пустой строкой или состоять только из пробелов");
+        }
     }
 
     public String getName() {
         return name;
     }
 
-    public double getPrice(){
-        return price;
-    }
+    public abstract double getPrice();
 
     public boolean isSpecial() {
         return true;
     }
 
-    public abstract String searchTerm();
-
-    protected String getStringRepresentation() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                '}';
+    public String getSearchTerm() {
+        return name;
     }
 
-    public String getNameProduct() {
-        return name;
+    @Override
+    public String getContentType() {
+        return "PRODUCT";
     }
 
 }
