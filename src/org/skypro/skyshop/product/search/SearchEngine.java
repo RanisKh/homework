@@ -3,14 +3,14 @@ package org.skypro.skyshop.product.search;
 import java.util.*;
 
 public class SearchEngine {
-    private static Set<Searchable> searchables;
+    private Set<Searchable> searchables;
 
 
     public SearchEngine(int initialCapacity) {
         this.searchables = new HashSet<>(initialCapacity);
     }
 
-    public static final Comparator<Searchable> LENGTH_THEN_NATURAL_COMPARATOR = new Comparator<Searchable>() {
+    private static final Comparator<Searchable> LENGTH_THEN_NATURAL_COMPARATOR = new Comparator<Searchable>() {
         @Override
         public int compare(Searchable o1, Searchable o2) {
             int lengthCompare = Integer.compare(
@@ -35,7 +35,7 @@ public class SearchEngine {
         String LowerQuery = query.toLowerCase();
 
         for (Searchable item : searchables) {
-            if (item == null) continue;
+            if (item == null){ continue;}
 
             String searchTerm = item.getSearchTerm();
 
