@@ -1,54 +1,54 @@
 package org.skypro.skyshop.product.search;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class SearchEngine {
-    private Set<Searchable> searchables;
+    private static Set<Searchable> searchables;
+
+    public SearchEngine() {
+        this.searchables = new HashSet<>();
+    }
 
 
     public SearchEngine(int initialCapacity) {
         this.searchables = new HashSet<>(initialCapacity);
     }
 
-    private static final Comparator<Searchable> LENGTH_THEN_NATURAL_COMPARATOR = new Comparator<Searchable>() {
-        @Override
-        public int compare(Searchable o1, Searchable o2) {
-            int lengthCompare = Integer.compare(
-                    o2.getName().length(),
-                    o1.getName().length()
-            );
-            if (lengthCompare != 0 ){
-                return lengthCompare;
-            }
+    private static final Comparator<Searchable> LENGTH_THEN_NATURAL_COMPARATOR = (s1, s2) -> {
+        int lenghtCompare = Integer.compare(
+                s2.getName().length(),
+                s1.getName().length()
+        );
 
-            return o1.getName().compareTo(o2.getName());
+        if (lenghtCompare != 0) {
+            return lenghtCompare;
         }
+        return s1.getName().compareTo(s2.getName());
     };
 
     public static Set<Searchable> search(String query) {
-        Set<Searchable> results = new TreeSet<>(LENGTH_THEN_NATURAL_COMPARATOR);
 
         if (query == null || query.trim().isEmpty()) {
-            return results;
+            return new TreeSet<>(LENGTH_THEN_NATURAL_COMPARATOR);
         }
 
         String LowerQuery = query.toLowerCase();
 
-        for (Searchable item : searchables) {
-            if (item == null){ continue;}
+        return searchables.stream()
+                .filter(Objects::nonNull)
+                .filter(item -> item.getSearchTerm() != null)
+                .filter(item -> item.getSearchTerm().toLowerCase().contains(LowerQuery))
+                .collect(Collectors.toCollection(
+                        ()-> new TreeSet<>(LENGTH_THEN_NATURAL_COMPARATOR)
+                ));
 
-            String searchTerm = item.getSearchTerm();
-
-            if (searchTerm != null && searchTerm.toLowerCase().contains(LowerQuery)) {
-                results.add(item);
-            }
-        }
-        return results;
     }
 
     public static boolean add(Searchable item) {
         if (item != null) {
-           return searchables.add(item);
+            return searchables.add(item);
         }
         return false;
     }
@@ -63,11 +63,11 @@ public class SearchEngine {
         }
     }
 
-    public boolean remove(Searchable item){
+    public boolean remove(Searchable item) {
         return searchables.remove(item);
     }
 
-    public boolean contains(Searchable item){
+    public boolean contains(Searchable item) {
         return searchables.contains(item);
     }
 

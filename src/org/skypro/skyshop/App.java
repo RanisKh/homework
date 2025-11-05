@@ -53,7 +53,7 @@ public class App {
         Set<Searchable> breadResults = SearchEngine.search("Хлеб");
         printResult((List<Searchable>) breadResults);
 
-
+        productBasket.countSpecial();
         productBasket.removeAllProductsByName("Баранина");
         productBasket.removeProduct(bread);
         productBasket.clearBasket();
